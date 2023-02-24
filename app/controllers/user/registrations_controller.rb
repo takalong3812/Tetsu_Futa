@@ -59,4 +59,10 @@ class User::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+   def after_sign_up_path_for(resource)
+    flash[:notice] = "会員登録できました。"
+    user_user_path(resource)
+   end
+
 end

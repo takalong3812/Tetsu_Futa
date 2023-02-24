@@ -5,8 +5,8 @@ Rails.application.routes.draw do
 
   #エンドユーザー用
   devise_for :users,skip: [:passwords], controller: {
-    registration: "user/registrations",
-    sessions: "user/sessions"
+    registrations: "user/registrations",
+    sessions: 'user/sessions'
   }
 
   #管理者用

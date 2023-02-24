@@ -24,4 +24,15 @@ class User::SessionsController < Devise::SessionsController
   # def configure_sign_in_params
   #   devise_parameter_sanitizer.permit(:sign_in, keys: [:attribute])
   # end
+
+  protected
+
+ def reject_inactive_user
+   @user= User.find_by(email: params[:user][:email])
+   return if !@user
+   if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
+   redirect_to new_user_registration_path
+   end
+ end
+
 end

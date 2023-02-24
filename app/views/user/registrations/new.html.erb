@@ -1,29 +1,39 @@
-<h2>Sign up</h2>
+div class="container">
+ <h2>新規ユーザー登録</h2>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
-  <%= render "users/shared/error_messages", resource: resource %>
+<%= form_with model: @user, url: user_registration_path, local:true do |f| %>
+  <%= render "user/shared/error_messages", resource: resource %>
+  <%= f.file_field :image, accept: "image/*" %>
 
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
+  <div class="form-group row">
+    <%= f.label :"メールアドレス", class: "col-md-3" %>
+    <%= f.email_field :email, placeholder: "", class: "col-md-5 form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
+  <div class="form-group row">
+      <%= f.label :"パスワード(６文字以上)", class: "col-md-3" %>
+      <%= f.password_field :password, class: "col-md-5 form-control" %>
   </div>
 
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
+  <div class="form-group row">
+    <%= f.label :"ユーザー名" , class: "col-md-3" %>
+    <%= f.text_field :name, placeholder: "", class: "col-md-2 form-control" %>
   </div>
 
-  <div class="actions">
-    <%= f.submit "Sign up" %>
+   <div class="form-group row">
+    <%= f.label :"自己紹介" , class: "col-md-3" %>
+    <%= f.text_field :introduction, placeholder: "", class: "col-md-2 form-control" %>
   </div>
+
+  <div class="form-group row">
+    <%= f.submit "新規登録", class: "btn btn-success col-md-1 offset-1" %>
+  </div>
+
 <% end %>
 
-<%= render "user/shared/links" %>
+  <div>
+    既に登録済みの方は
+  <br>
+    <%= link_to "こちら", "/users/sign_in" %>からログインして下さい
+  </div>
+</div>
