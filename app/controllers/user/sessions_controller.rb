@@ -27,10 +27,10 @@ class User::SessionsController < Devise::SessionsController
 
   protected
 
- def reject_inactive_user
+ def user state
    @user= User.find_by(email: params[:user][:email])
    return if !@user
-   if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
+   if @user.valid_password?(params[:user][:password]) && @user.is_deleted
    redirect_to new_user_registration_path
    end
  end
