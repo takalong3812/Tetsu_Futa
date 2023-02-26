@@ -13,8 +13,6 @@ class User < ApplicationRecord
     self.likes.exists?(post_id: post.id)
   end
 
-
-
   has_one_attached :image
 
 

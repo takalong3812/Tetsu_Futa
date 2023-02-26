@@ -5,43 +5,65 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-
+    <meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
     <%= stylesheet_pack_tag 'application', media: 'all', 'data-turbolinks-track': 'reload' %>
     <%= javascript_pack_tag 'application', 'data-turbolinks-track': 'reload' %>
   </head>
 
-  <body>
+  <body class="d-flex flex-column vh-100">
     <header class="shadow-sm">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <div class="container">
-         <a class="navbar-brand p-3" href="/"><%= image_tag 'manhole.jpg', :size =>'150x150' %></a>
-         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-         </button>
-          <div class="collapse navbar-collapse" id="navbarNavDropdown">
+     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+      <a class="navbar-brand p-3" href="/"><%= image_tag 'manhole.jpg', :size =>'150x150' %></a>
+      <%= link_to root_path, class: 'nav-link text-white' do %>
+      <h1><i class="fa-solid fa-circle-radiation"></i>Tetsu_Futa<i class="fa-solid fa-circle-radiation"></i></h1>
+      <% end %>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNavDropdown">
+       <div class="navbar-nav ml-auto">
 
-
-        <% if user_signed_in? %>
-              <p>ようこそ<%= current_user.name %>さん！</p>
-            <% end %>
     <ul class="navbar-nav ml-auto">
        <% if user_signed_in? %>
-       <li class="navbar-link"><%= link_to "マイページ", user_user_path(current_user), class: "btn btn-outline-dark" %></li>
-       <li class="navbar-link"><%= link_to "ログアウト", destroy_user_session_path, method: :delete, class: "btn btn-outline-dark" %></li>
+
+         <li class="nav-item">
+         <%= link_to user_user_path(current_user), class: 'nav-link text-white' do%>
+         <i class="fa-solid fa-person"></i>マイページ</li>
+         <% end %>
+
+         <li class="nav-item">
+         <%= link_to destroy_user_session_path, method: :delete, class: 'nav-link text-white' do %>
+         <i class="fa-solid fa-right-from-bracket"></i>ログアウト</li>
+         <% end %>
+
        <% elsif admin_signed_in? %>
-       <li class="navbar-link"><%= link_to "ホーム", admin_root_path, class: "btn btn-outline-dark" %></li>
-       <li class="navbar-link"><%= link_to "ユーザー覧", admin_users_path, class: "btn btn-outline-dark" %></li>
-       <li class="navbar-link"><%= link_to "ログアウト", destroy_admin_session_path, method: :delete, class: "btn btn-outline-dark" %></li>
+
+       <li class="nav-item">
+         <%= link_to admin_root_path, class: 'nav-link text-white' do %>
+         <i class="fa-solid fa-house-chimney"></i>ホーム</li>
+         <% end %>
+
+         <li class="nav-item">
+         <%= link_to admin_users_path, class: 'nav-link text-white' do %>
+         <i class="fa-solid fa-users"></i>ユーザー一覧</li>
+         <% end %>
+
+         <li class="nav-item">
+         <%= link_to destroy_admin_session_path, method: :delete, class: 'nav-link text-white' do %>
+         <i class="fa-solid fa-right-from-bracket"></i>ログアウト</li>
+         <% end %>
 
       <% else %>
 
-      <li class="nav-item">
-        <%= link_to new_user_session_path, class:'nav-link text-dark' do %>
-         <i class="fa-solid fa-right-to-bracket"></i>ログイン
+        <li class="nav-item">
+        <%= link_to new_user_session_path, class:'nav-link text-white' do %>
+        <i class="fa-solid fa-right-to-bracket"></i>ログイン</li>
         <% end %>
 
-        <%= link_to root_path, class:'nav-link text-dark' do %>
-        <i class="fa-solid fa-house"></i>ホーム
+        <li class="nav-item">
+        <%= link_to root_path, class:'nav-link text-white' do %>
+        <i class="fa-solid fa-house"></i>ホーム</li>
         <% end %>
 
       <% end %>

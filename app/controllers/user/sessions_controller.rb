@@ -1,6 +1,7 @@
 # frozen_string_literal: true
 
 class User::SessionsController < Devise::SessionsController
+  before_action :reject_inactive_user, only:[:create]
   # before_action :configure_sign_in_params, only: [:create]
 
   # GET /resource/sign_in
@@ -27,10 +28,10 @@ class User::SessionsController < Devise::SessionsController
 
   protected
 
- def user state
+ def reject_inactive_user
    @user= User.find_by(email: params[:user][:email])
    return if !@user
-   if @user.valid_password?(params[:user][:password]) && @user.is_deleted
+   if @user.valid_password?(params[:user][:password]) && @user.is_deleted == true
    redirect_to new_user_registration_path
    end
  end

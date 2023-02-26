@@ -4,6 +4,8 @@ class User::UsersController < ApplicationController
 
   def show
   @user= User.find(params[:id])
+  @posts= @user.posts
+  @post= Post.new
   end
 
   def edit
@@ -11,6 +13,9 @@ class User::UsersController < ApplicationController
     if @user == current_user
     else
      redirect_to user_user_path(current_user)
+    end
+    if @user.email == 'guest@example.com'
+     redirect_to user_user_path(current_user), notice: 'ゲストユーザーは情報を編集できません'
     end
   end
 

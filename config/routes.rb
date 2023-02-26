@@ -19,6 +19,12 @@ Rails.application.routes.draw do
     resources :users
     get 'users/:id/unsubscribe' => 'users#unsubscribe', as: 'unsubscribe'
     patch 'users/:id/withdrawal' => 'users#withdrawal', as: 'withdrawal'
+    post '/guests/guest_sign_in', to: 'guests#new_guest'
+    resources :posts do
+    get :search, on: :collection
+    resources :likes, only: [:create, :destroy]
+    resources :comments, only:[:create, :destroy]
+    end
 
    end
 
