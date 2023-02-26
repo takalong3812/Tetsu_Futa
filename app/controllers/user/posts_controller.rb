@@ -20,6 +20,16 @@ class User::PostsController < ApplicationController
       @comment= Comment.new
   end
 
+  def destroy
+     @post=Post.find(params[:id])
+     if @post.destroy
+      flash[:notice]= '投稿を削除しました'
+      redirect_to user_user_path(current_user)
+     else
+      redirect_to user_post_path(@post.id)
+     end
+  end
+
 
    private
 
