@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
-  has_one_attached :image
+
+
+has_one_attached :image
 belongs_to :user
 has_many :post_tag_relations, dependent: :destroy
 has_many :tags, through: :post_tag_relations, dependent: :destroy
