@@ -1,7 +1,7 @@
 <div class="container user-page">
   <p class="text-center pt-2"></p>
 
-   <h2>ユーザー情報</h2>
+   <h2>ユーザー情報<i class="fa-solid fa-user"></i></h2>
        <% if @user.image.attached? %>
        <%= image_tag @user.image, size: "100x100" %>
        <% end %>
@@ -22,6 +22,27 @@
          <i class="fas fa-user-cog"></i>
         <% end %>
       </div>
+
+  <div class="col-md-8 offset-md-1">
+  <h3>いいねしている投稿一覧</h3>
+  <table class="table table-hover table-inverse">
+    <thead>
+     <tr>
+      <th>ユーザー</th>
+      <th>タイトル</th>
+      <th colspan="3"></th>
+     </tr>
+    </thead>
+    <tbody>
+  　<% @user.liked_posts.each do |post| %>
+  　<tr>
+     <td><%= post.user.name %></td>
+     <td><%= post.title %></td>
+  　</tr>
+  　<% end %>
+    </tbody>
+   </table>
+  </div>
 
   <h2 class="mt-3">新規投稿</h2>
   <%= form_with model:@post,url: user_posts_path, local:true do |f| %>
@@ -45,11 +66,39 @@
       <%= f.text_field :address %>
    </div>
 
+   <div class='form-group'>
+     <label>タグ</label>
+     <%= f.collection_check_boxes(:tag_ids, Tag.all, :id, :name) do |tag| %>
+       <div class='form-check'>
+         <%= tag.label class: 'form-check-label' do %>
+             <%= tag.check_box class: 'form-check-input' %>
+             <%= tag.text %>
+         <% end %>
+       </div>
+     <% end %>
+   </div>
+
    <div class="form-group">
       <%= button_tag :type => "submit", :class=>"btn btn-default btn-s-md" do %>
        <i class="fas fa-circle"></i>投稿
    </div>
    <% end %>
+
+
+
+   <h3>タイトル検索<i class="fa-solid fa-magnifying-glass"></i></h3>
+  <%= form_with url: search_user_posts_path, method: :get, local: true do |f| %>
+  <%= f.text_field :title %>
+  <%= f.submit :search %>
+<% end %>
+
+<h3>タグ検索<i class="fa-solid fa-magnifying-glass"></i></h3>
+<%= form_tag({controller:"user/posts",action:"index"}, method: :get) do %>
+    <% Tag.all.each do |t| %>
+        <li><%= check_box :tag_ids, t.name %><%= t.name %></li>
+    <% end %>
+    <%= submit_tag '検索' %>
+<% end %>
 
  <div class="col-md-8 offset-md-1">
    <h2>投稿一覧</h2>
@@ -85,7 +134,6 @@
    </div>
 
 
-
-
 </div>
 <% end %>
+
