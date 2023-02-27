@@ -1,3 +1,7 @@
+<div class="container">
+ <div class="row">
+  <div class="mx-auto col-11 col-sm-10 col-lg-8 col-xl-6">
+
 <h3><i class="fa-brands fa-gg-circle"></i>ようこそTetsu_Futaへ<i class="fa-brands fa-gg-circle"></i></h3>
 
 <p>Tetsu_Futaは、マンホール蓋やマンホールカードが好きな者同士で、<br>
@@ -16,3 +20,9 @@
      <div class="row">
        <%= link_to '管理者ログイン', new_admin_session_path, class: "btn btn-dark btn-sm btn-block mb-3 sign_in" %>
      </div>
+     <div class="row">
+       <%= link_to 'ゲストユーザーログイン', user_guests_guest_sign_in_path, method: :post, class: "btn btn-primary btn-sm btn-block mb-3 sign_in" %>
+     </div>
+    </div>
+ </div>
+</div>

@@ -58,7 +58,12 @@
 
         <li class="nav-item">
         <%= link_to new_user_session_path, class:'nav-link text-white' do %>
-        <i class="fa-solid fa-right-to-bracket"></i>ログイン</li>
+        <i class="fa-solid fa-right-to-bracket"></i>会員ログイン</li>
+        <% end %>
+
+        <li class="nav-item">
+        <%= link_to new_admin_session_path, class:'nav-link text-white' do %>
+        <i class="fa-solid fa-unlock"></i>管理者ログイン</li>
         <% end %>
 
         <li class="nav-item">

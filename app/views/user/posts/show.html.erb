@@ -46,8 +46,9 @@
       <% if @user.image.attached? %>
       <p><%= image_tag comment.user.image, size: "60x60" %></p>
       <% end %>
-      <%= comment.user.name %>
-      <%= comment.created_at.strftime('%Y%m%d')%><%= comment.comment %>
+      <li><%= comment.user.name %></li>
+      <li><%= comment.created_at.strftime('%Y%m%d')%></li>
+      <strong><li><%= comment.comment %></li></strong>
       <% if comment.user == current_user %>
        <%= link_to "削除", user_post_comment_path(comment.post,comment), method: :delete %>
       <% end %>

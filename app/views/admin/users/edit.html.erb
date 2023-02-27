@@ -1,0 +1,36 @@
+<div class="container">
+    <div class="row">
+      <h3><%= @user.name %>さんの登録情報編集<i class="fa-solid fa-street-view"></i></h3>
+    </div>
+
+    <div>
+    <%= form_with model: @user, url: admin_user_path, method: :PATCH, local:true do |f| %>
+
+
+    <div class="form-group row">
+        <%= f.label :イメージ, class:"col-md-3"%>
+        <%= f.file_field :image, accept: "image/*" %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :ユーザー名, class: "col-md-3" %>
+        <%= f.text_field :name, class: "col-md-2 form-control" %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :プロフィール, class: "col-md-3" %>
+        <%= f.text_field :introduction, class: "col-md-5 form-control" %>
+    </div>
+
+    <div class="form-group row">
+        <%= f.label :会員ステータス, class: "col-md-3" %>
+        <label><%= f.radio_button :is_deleted?, false, checked: true %>有効</label>
+        <label class="ml-3"><%= f.radio_button :is_deleted, true %>退会</label>
+    </div>
+
+
+    <div class="form-group row">
+        <%= f.submit "変更を保存", class: "btn btn-success col-md-2 offset-3" %>
+    </div>
+   <% end %>
+   </div>
